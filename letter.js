@@ -6,10 +6,12 @@ function Letter(value) {
       if (this.letter === " ") {
         this.guessed = true;
         return " ";
-      } else {
+      }
+      else {
         if (this.guessed === false) {
           return "_";
-        } else {
+        } 
+        else {
           return this.letter;
         }
       }

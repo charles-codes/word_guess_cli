@@ -1,10 +1,11 @@
+// variables for require statements to inquirer and the word function //
 var Word = require("./word.js");
 var inquirer = require("inquirer");
 
-// letters entry
+// variable for letters array //
 var letterArray = "abcdefghijklmnopqrstuvwxyz";
 
-// List of words to choose from
+// list of answer words to choose from, in this case NBA teams //
 var nbaTeams = [
   "bucks",
   "raptors",
@@ -38,36 +39,36 @@ var nbaTeams = [
   "sun"
 ];
 
-// Pick Random index from nbaTeams array
+// variable for choosing random team from the nbaTeams array //
 var randomIndex = Math.floor(Math.random() * nbaTeams.length);
 var randomWord = nbaTeams[randomIndex];
 
-// Pass random word through Word constructor
+// pass random word through Word constructor //
 var computerWord = new Word(randomWord);
-
 var requireNewWord = false;
 
-// Array for guessed letters
+// array for guessed letters //
 var incorrectLetters = [];
 var correctLetters = [];
 
-// Guesses left
+// guesses left //
 var guessesLeft = 10;
 
 function logic() {
-  // Generates new word for Word constructor if true
+  // generates new word for Word constructor if true //
   if (requireNewWord) {
-    // Selects random nbaTeams array
+
+    // selects random nbaTeams array //
     var randomIndex = Math.floor(Math.random() * nbaTeams.length);
     var randomWord = nbaTeams[randomIndex];
 
-    // Passes random word through the Word constructor
+    // passes random word through the Word constructor //
     computerWord = new Word(randomWord);
 
     requireNewWord = false;
   }
 
-  // TestS if a letter guessed is correct
+  // tests if a letter guessed is correct //
   var wordComplete = [];
   computerWord.objArray.forEach(completeCheck);
 
@@ -97,12 +98,13 @@ function logic() {
             console.log("\nAlready Guessed\n");
             logic();
           } else {
-            // Checks if guess is correct
+
+            // checks if guess is correct //
             var wordCheckArray = [];
 
             computerWord.userGuess(input.userinput);
 
-            // Checks if guess is correct
+            // checks if guess is correct //
             computerWord.objArray.forEach(wordCheck);
             if (wordCheckArray.join("") === wordComplete.join("")) {
               console.log("\nIncorrect\n");
@@ -117,21 +119,23 @@ function logic() {
 
             computerWord.log();
 
-            // Print guesses left
+            // print guesses left //
             console.log("Guesses Left: " + guessesLeft + "\n");
 
-            // Print letters guessed already
+            // print letters guessed already //
             console.log(
               "Letters Guessed: " + incorrectLetters.join(" ") + "\n"
             );
 
-            // Guesses left
+            // guesses left //
             if (guessesLeft > 0) {
-              // Call function
+
+              // call game function //
               logic();
             } else {
               console.log("You've lost the game!\n");
 
+              // call reset game function //
               resetGame();
             }
 
@@ -152,6 +156,7 @@ function logic() {
   }
 }
 
+// function for resetting the whole game //
 function resetGame() {
   inquirer
     .prompt([
@@ -175,4 +180,5 @@ function resetGame() {
     });
 }
 
+// call to run whole game function logic //
 logic();
