@@ -168,7 +168,7 @@ function resetGame() {
       }
     ])
     .then(function(input) {
-      if (input.reset === "Play Again?") {
+      if (input.reset === "Play Again?\n") {
         requireNewWord = true;
         incorrectLetters = [];
         correctLetters = [];
